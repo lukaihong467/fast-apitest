@@ -68,7 +68,10 @@ onMounted(loadProjects)
 <template>
   <section class="panel">
     <header class="panel__header">
-      <h2>项目管理</h2>
+      <div class="panel__title">
+        <h2>项目管理</h2>
+        <p>维护业务项目、负责人信息与基础统计。</p>
+      </div>
       <button class="refresh" @click="loadProjects" :disabled="loading">刷新</button>
     </header>
     <p v-if="error" class="panel__error">{{ error }}</p>
@@ -101,7 +104,7 @@ onMounted(loadProjects)
         描述
         <textarea v-model="form.description" placeholder="项目介绍" rows="2"></textarea>
       </label>
-      <button type="submit" :disabled="loading">新建项目</button>
+      <button class="primary" type="submit" :disabled="loading">新建项目</button>
     </form>
   </section>
 </template>
@@ -110,12 +113,22 @@ onMounted(loadProjects)
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .panel__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 1rem;
+}
+.panel__title h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+.panel__title p {
+  margin: 0.25rem 0 0;
+  color: #6b7280;
+  font-size: 0.9rem;
 }
 .panel__error {
   color: #b91c1c;
@@ -151,30 +164,24 @@ label {
   gap: 0.25rem;
   font-size: 0.875rem;
 }
-input,
-textarea {
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 0.75rem;
-  font: inherit;
-}
-button {
-  align-self: flex-start;
-  background-color: var(--accent-color);
-  border: none;
-  color: white;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
 .refresh {
-  background: none;
-  color: var(--accent-color);
-  border: 1px solid var(--accent-color);
+  align-self: flex-start;
+  background: rgba(37, 99, 235, 0.08);
+  color: #1d4ed8;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.refresh:hover:not(:disabled) {
+  border-color: rgba(37, 99, 235, 0.55);
+  background: rgba(37, 99, 235, 0.12);
+}
+.refresh:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 .empty {
   color: #6b7280;

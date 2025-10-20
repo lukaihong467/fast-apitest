@@ -83,8 +83,11 @@ async function createEnvironment() {
 <template>
   <section class="panel">
     <header class="panel__header">
-      <h2>环境配置</h2>
-      <span v-if="projectId">当前项目 ID：{{ projectId }}</span>
+      <div class="panel__title">
+        <h2>环境配置</h2>
+        <p>集中维护 API 请求的基础地址、变量与头信息。</p>
+      </div>
+      <span v-if="projectId" class="panel__context">当前项目 ID：{{ projectId }}</span>
     </header>
     <p v-if="!projectId" class="empty">请选择一个项目查看对应环境。</p>
     <template v-else>
@@ -128,7 +131,9 @@ async function createEnvironment() {
         <label class="inline">
           <input type="checkbox" v-model="form.is_default" /> 设置为默认
         </label>
-        <button type="submit">保存环境</button>
+
+        <button class="primary" type="submit">保存环境</button>
+
       </form>
     </template>
   </section>
@@ -138,12 +143,32 @@ async function createEnvironment() {
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+
 }
 .panel__header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.panel__title h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+.panel__title p {
+  margin: 0.25rem 0 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.panel__context {
+  align-self: center;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  color: #1d4ed8;
+
 }
 .panel__error {
   color: #b91c1c;
@@ -194,22 +219,6 @@ label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-input,
-textarea {
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 0.75rem;
-  font: inherit;
-}
-button {
-  align-self: flex-start;
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  padding: 0.5rem 1.25rem;
-  border-radius: 6px;
-  cursor: pointer;
 }
 .empty {
   color: #6b7280;
