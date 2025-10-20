@@ -6,6 +6,7 @@ import InterfaceConsole from './components/InterfaceConsole.vue'
 import ScenarioDesigner from './components/ScenarioDesigner.vue'
 import TestSuiteRunner from './components/TestSuiteRunner.vue'
 
+
 const sections = [
   {
     key: 'projects',
@@ -47,14 +48,17 @@ const sections = [
     accent: '346 77% 56%',
     requiresProject: true,
   },
+
 ]
 
 const activeTab = ref('projects')
 const selectedProjectId = ref(null)
 
+
 const activeSection = computed(
   () => sections.find((section) => section.key === activeTab.value) ?? sections[0]
 )
+
 
 const subtitle = computed(() => {
   if (!selectedProjectId.value) {
@@ -63,13 +67,16 @@ const subtitle = computed(() => {
   return `当前项目 ID：${selectedProjectId.value}`
 })
 
+
 function switchTab(section) {
   if (section.requiresProject && !selectedProjectId.value) return
   activeTab.value = section.key
+
 }
 </script>
 
 <template>
+
   <div class="shell">
     <aside class="sidebar">
       <div class="sidebar__brand">
@@ -132,11 +139,13 @@ function switchTab(section) {
         <ScenarioDesigner v-else-if="activeTab === 'scenarios'" :project-id="selectedProjectId" />
         <TestSuiteRunner v-else-if="activeTab === 'suites'" :project-id="selectedProjectId" />
       </section>
+
     </main>
   </div>
 </template>
 
 <style scoped>
+
 .shell {
   min-height: 100vh;
   display: grid;
@@ -356,5 +365,6 @@ function switchTab(section) {
   .workspace {
     padding: 2.5rem 1.75rem 3rem;
   }
+
 }
 </style>

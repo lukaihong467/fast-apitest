@@ -131,7 +131,9 @@ async function createEnvironment() {
         <label class="inline">
           <input type="checkbox" v-model="form.is_default" /> 设置为默认
         </label>
+
         <button class="primary" type="submit">保存环境</button>
+
       </form>
     </template>
   </section>
@@ -142,6 +144,7 @@ async function createEnvironment() {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
 }
 .panel__header {
   display: flex;
@@ -165,6 +168,7 @@ async function createEnvironment() {
   padding: 0.35rem 0.9rem;
   font-size: 0.85rem;
   color: #1d4ed8;
+
 }
 .panel__error {
   color: #b91c1c;
